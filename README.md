@@ -2,7 +2,7 @@
 
 ## Utilité
 
-Je devrais plutôt dire **in**utilité.. Rickdetect est un outil permettant de savoir si un lien (même raccourci) est enfaite la vidéo [Never Gonna Give You Up](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+Je devrais plutôt dire **in**utilité.. Rickdetect est un outil permettant de savoir si un lien (même raccourci) est enfaite la vidéo [Never Gonna Give You Up](https://www.youtube.com/watch?v=dQw4w9WgXcQ). D'ailleurs, Rickdetect n'arrive pas à détecter tous les liens mais en détecte quand même une grande partie.
 
 
 ## Prérequis
