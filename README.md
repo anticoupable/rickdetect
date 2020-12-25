@@ -19,3 +19,15 @@ Ouvrez un terminal et faites cette commande `npm i terminal-kit node-fetch expan
 ## Lancement
 
 Dans un terminal, Naviguez là où vous avez téléchargé le fichier [rickdetect.js](https://github.com/anticoupable/rickdetect/blob/main/rickdetect.js) et faites la commande `node rickdetect`, Vous pouvez ensuite entrez votre lien à tester.
+
+
+## Exemples
+
+**Lien rick roll à tester :**
+
+  - https://www.youtube.com/watch?v=dQw4w9WgXcQ
+  - https://youtu.be/xaazUgEKuVA
+  - https://is.gd/OiqSNs
+  - http://bit.do/not-rick
+  
+
