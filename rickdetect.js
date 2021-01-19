@@ -13,8 +13,8 @@ term.inputField(function(error, input){
         fetch(longUrl) // Envoyer une requête au site
         .then(res => res.text())
         .then(body => {
-            // Regarder si le code de la page contient "never gonna give you up", "rick roll" ou "rick astley"
-            if(body.toLowerCase().includes("never gonna give you up") || body.toLowerCase().includes("rick roll") || body.toLowerCase().includes("rick astley")){
+            // Faire une analyse du code source de la page
+            if(body.toLowerCase().includes("never","gonna","give","you","up") || body.toLowerCase().includes("rick","roll") || body.toLowerCase().includes("never","gonna","desert","you")){
                 term.red("\nIl se peut que votre lien contienne \"Never Gonna Give You Up\"."); // Indiquer que le lien est un rick roll
             } else {
                 term.green("\nRien de suspect n'a été détecté."); // Indiquer si rien de suspect n'a été détecté
@@ -36,5 +36,13 @@ term.on('key', function(name, matches, data){
   // Si CTRL_Z : Arrêtez le processus
 	if (name === 'CTRL_Z'){
 		process.exit();
-	}
+    }
+  // Si CTRL_C : Arrêtez le processus
+    if (name === 'CTRL_C'){
+        process.exit();
+    }
+  // Si CTRL_D : Arrêtez le processus
+    if (name === 'CTRL_D'){
+        process.exit();
+    }
   });
