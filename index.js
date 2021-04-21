@@ -122,7 +122,7 @@ if(cli.flags.config){
             if(sendPageCode === "Y"){ haste.post("Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll trouvé !\n\n\n" + code, "html").then(link => console.log(link)); }
         } else {
             console.log(chalk.green("Ce lien n'a pas l'air très suspect..."))
-            if(sendPageCode === "Y"){ haste.post("Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll trouvé !\n\n\n" + code, "html").then(link => console.log(link)); }
+            if(sendPageCode === "Y"){ haste.post("Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll non trouvé !\n\n\n" + code, "html").then(link => console.log(link)); }
         }
     })
 
