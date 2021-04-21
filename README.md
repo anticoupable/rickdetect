@@ -22,6 +22,7 @@ $ npm i
 $ npm link
 ```
 
+
 ## Utilisation
 
 ```
@@ -37,6 +38,7 @@ $ rickdetect --help
     --config -c            Permet d'entrer dans la configuration de Rickdetect
 ```
 
+
 ## v1 --> v2
 
 * Réécriture complète du code (même le README)
@@ -49,3 +51,28 @@ $ rickdetect --help
 * Ajout d'un fichier .npmrc pour ne pas avoir de package-lock.json
 * Beaucoup d'autre chose...
 
+
+## Utilisé pour la création
+
+* [Meow](https://www.npmjs.com/package/meow) (CLI)
+* [Node fetch](https://www.npmjs.com/package/node-fetch) (Récupérer le code d'une page)
+* [Clipboardy](https://www.npmjs.com/package/clipboardy) (Accéder au presse-papier)
+* [Chalk](https://www.npmjs.com/package/chalk) (Mettre des couleurs dans le terminal)
+* [Prompt](https://www.npmjs.com/package/prompt) (Demande de texte pour la configuration)
+* [Hastebin.js](https://www.npmjs.com/package/hastebin.js) (Option pour mettre le code d'une page sur Hastebin)
+* [conf](https://www.npmjs.com/package/conf) (Enregistrer des données de configuration)
+* [Hastebin edit](https://hasteb.herokuapp.com)
+* Du temps...
+
+
+## Exemple
+
+* https://www.youtube.com/watch?v=dQw4w9WgXcQ
+* https://youtu.be/xaazUgEKuVA
+* https://is.gd/OiqSNs
+* http://bit.do/not-rick
+
+
+## Licence
+
+ISC © [Johan](https://johan-perso.glitch.me)
