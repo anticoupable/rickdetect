@@ -1,17 +1,17 @@
 ##### [english version of the README](/README-EN.md)
 
-# Rickdetect
+## Rickdetect
 
 Rickdetect est un outil permettant de savoir si un lien est enfaite la vidéo [Never Gonna Give You Up](https://www.youtube.com/watch?v=dQw4w9WgXcQ). Pour cela, Rickdetect analyse le code HTML de la page (mais si les informations comme le titre ne sont pas dans le code HTML, c'est le cas de YouTube Music, cela ne va pas fonctionner.)
 
 
-## Prérequis
+## Prérequis
 
 * Un appareil sous Windows, MacOS, Linux ou ChromeOS (Avec Crostini)
 * [nodejs et npm](https://nodejs.org) d'installé
 
 
-## Installation
+## Installation
 
 Assure-toi d'avoir [Node.js et npm](https://nodejs.org) d'installer sur ton appareil puis suis ces étapes dans l'ordre (tu auras peut-être besoin de redémarrer ton terminal / ton appareil après l'installation pour l'utiliser) :
 
@@ -25,7 +25,7 @@ $ npm link
 ```
 
 
-## Utilisation
+## Utilisation
 
 ```
 $ rickdetect --help
@@ -61,7 +61,7 @@ $ rickdetect --help
 * Option --version (ou -v) pour voir la version utilisés
 
 
-## Utilisé pour la création
+## Utilisé pour la création
 
 * [Meow](https://www.npmjs.com/package/meow) (CLI)
 * [Node fetch](https://www.npmjs.com/package/node-fetch) (Récupérer le code d'une page)
@@ -75,7 +75,7 @@ $ rickdetect --help
 * Du temps...
 
 
-## Exemple
+## Exemple
 
 * https://www.youtube.com/watch?v=dQw4w9WgXcQ
 * https://youtu.be/xaazUgEKuVA
