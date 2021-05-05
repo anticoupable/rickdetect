@@ -8,7 +8,7 @@ const clipboardy = require('clipboardy'); // https://www.npmjs.com/package/clipb
 const chalk = require('chalk'); // https://www.npmjs.com/package/chalk
 const prompt = require('prompt'); // https://www.npmjs.com/package/prompt
 const hastebin = require('hastebin.js'); // https://www.npmjs.com/package/hastebin.js
-const haste = new hastebin({url: 'https://hasteb.herokuapp.com'});
+const haste = new hastebin({url: 'https://hasteb.herokuapp.com'}); // Hastebin.js
 const Conf = require('conf'); // https://www.npmjs.com/package/conf
 const config = new Conf({ projectSuffix: "cli" }); // Conf
 
@@ -16,19 +16,30 @@ const config = new Conf({ projectSuffix: "cli" }); // Conf
     // Get
     let userAgentSwitcher = config.get('userAgentSwitcher')
     let sendPageCode = config.get('sendPageCode')
+    let language = config.get('language')
 
     // Mettre un statut par défaut
     if(!userAgentSwitcher) config.set('userAgentSwitcher', 'Y')
     if(!sendPageCode) config.set('sendPageCode', 'N')
+    if(!language) config.set('language', 'fr')
+
+    // Obtenir le language
+    if(language === "fr") var lang = require('./language-fr.json')
+    if(language === "en") var lang = require('./language-en.json')
+    if(language !== "fr" && language !== "en") var lang = require('./language-fr.json')
 
 // Utilisation de meow pour le CLI
 const cli = meow(`
-	Utilisation
-	  $ rickdetect
 
-	Options
-	  --link -l <lien>         URL (Si non fournis, accède a votre presse papier)
-   --config -c              Permet d'entrer dans la configuration de Rickdetect
+${lang.cliUse.description}
+
+${lang.cliUse.use}
+  ${lang.cliUse.command}
+
+${lang.cliUse.option}
+  ${lang.cliUse.optionL}
+  ${lang.cliUse.optionC}
+  ${lang.cliUse.optionV}
 `, {
 	flags: {
 		link: {
@@ -38,9 +49,22 @@ const cli = meow(`
 		config: {
 			type: 'boolean',
 			alias: 'c'
-		}
-	}
+		},
+        version: {
+            type: 'boolean',
+            alias: 'v'
+        }
+	},	
+    autoVersion: false,
+    description: false
 });
+
+// Donner la version avec l'option associé
+if(cli.flags.version){
+	console.log(lang.version.info.replace(/%VERSION%/g, "2.1.0"))
+	console.log(lang.version.downloadMajText + chalk.cyan(lang.version.downloadMajLink))
+	return process.exit()
+}
 
 // Configuration
 if(cli.flags.config){
@@ -49,16 +73,23 @@ if(cli.flags.config){
         {
             name: 'userAgentSwitcher',
             validator: /^(?:Y|N)$/,
-            message: 'Changer l\'agent utilisateur [Y/N] [Défaut : Y] ',
-            warning: 'Veuillez choisir Y (oui) ou N (non).',
+            message: lang.config.userAgentSwitcher.message,
+            warning: lang.config.userAgentSwitcher.warning,
             default: 'Y'
         },
         {
             name: 'sendPageCode',
             validator: /^(?:Y|N)$/,
-            message: 'Afficher le code de la page [Y/N] [Défaut : N] ',
-            warning: 'Veuillez choisir Y (oui) ou N (non).',
+            message: lang.config.sendPageCode.message,
+            warning: lang.config.sendPageCode.warning,
             default: 'N'
+        },
+        {
+            name: 'language',
+            validator: /^(?:fr|en)$/,
+            message: lang.config.language.message,
+            warning: lang.config.language.warning,
+            default: 'fr'
         }
     ];
 
@@ -72,9 +103,11 @@ if(cli.flags.config){
         // Noter dans la config les réponses
         config.set('userAgentSwitcher', result.userAgentSwitcher);
         config.set('sendPageCode', result.sendPageCode);
+        config.set('language', result.language);
 
-        console.log('Changer l\'agent utilisateur : ' + result.userAgentSwitcher);
-        console.log('Afficher le code la page : ' + result.sendPageCode);
+        console.log(lang.config.userAgentSwitcher.infoText + result.userAgentSwitcher);
+        console.log(lang.config.sendPageCode.infoText + result.sendPageCode);
+        console.log(lang.config.language.infoText + result.language);
     });
 
 } else {
@@ -90,8 +123,8 @@ if(cli.flags.config){
             .then(res => res.text())
             .catch(err => {
                 // En cas d'erreur
-                if(err.code === "ENOTFOUND") return console.log(chalk.red("Il est impossible d'accèder a la page : Erreur de réseau ou problème venant du site.")) && process.exit()
-                console.log(chalk.red("Une erreur s'est produite : " + err.message)) && process.exit()
+                if(err.code === "ENOTFOUND") return console.log(chalk.red(lang.fetch.errENOTFOUND)) && process.exit()
+                console.log(chalk.red(lang.fetch.unkownError.replace(/%ERROR%/g, err.message))) && process.exit()
             })
         
         // Retourner le code
@@ -102,7 +135,7 @@ if(cli.flags.config){
     if(cli.flags.link) var linkA = cli.flags.link
     if(!cli.flags.link) var linkA = clipboardy.readSync()
 
-    // Enleve les espaces et saut de lignede l'URL
+    // Enleve les espaces et saut de ligne de l'URL
     if(linkA.includes(" ") && linkA.includes("\n")) var linkB = linkA.replace(/ /g, "").replace(/\n/g, "")
     if(linkA.includes(" ") && !linkA.includes("\n")) var linkB = linkA.replace(/ /g, "")
     if(!linkA.includes(" ") && linkA.includes("\n")) var linkB = linkA.replace(/\n/g, "")
@@ -113,16 +146,16 @@ if(cli.flags.config){
     if(linkB.startsWith("https://") || linkB.startsWith("http://")) var link = linkB
 
     // Dit si il n'y a pas de domaine
-    if(!link.includes(".")) return console.log(chalk("\"" + link + "\"") + chalk.red(" n'est pas une adresse valide, il manque une extension de domaine (.com, .fr, etc).")) && process.exit()
+    if(!link.includes(".")) return console.log(chalk.red(lang.fetch.notValidURL.replace(/%LINK%/g, link))) && process.exit()
 
     // Regarder si le code de la page contient certains éléments
     fetchSite(link).then(code => {
         if(code.toLowerCase().includes("never","gonna","give","you","up") || code.toLowerCase().includes("rick","roll") || code.toLowerCase().includes("never","gonna","desert","you")){
-            console.log(chalk.red("Ce lien est suspect..."))
-            if(sendPageCode === "Y"){ haste.post("Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll trouvé !\n\n\n" + code, "html").then(link => console.log(link)); }
+            console.log(chalk.red(lang.publish.found))
+            if(sendPageCode === "Y"){ haste.post(lang.publish.hasteFound.replace(/%CODE%/g, code), "html").then(link => console.log(link)); }
         } else {
-            console.log(chalk.green("Ce lien n'a pas l'air très suspect..."))
-            if(sendPageCode === "Y"){ haste.post("Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll non trouvé !\n\n\n" + code, "html").then(link => console.log(link)); }
+            console.log(chalk.green(lang.publish.notFound))
+            if(sendPageCode === "Y"){ haste.post(lang.publish.hasteNotFound.replace(/%CODE%/g, code), "html").then(link => console.log(link)); }
         }
     })
 
