@@ -1,0 +1,45 @@
+{
+    "cliUse": {
+        "description": "Check if a link try to rick roll you.",
+        "use": "Use",
+        "command": "$ rickdetect",
+        "optionL": "--link -l <link>         URL (If not given, check your clipboard)",
+        "optionC": "--config -c              Go into the Rickdetect config",
+        "optionV": "--version -v             Show the version used by Rickdetect",
+        "option": "Options"
+    },
+    "version": {
+        "info": "Your rickdetect actually use the %VERSION% version",
+        "downloadMajText": "\nDownload MAJ : ",
+        "downloadMajLink": "https://github.com/johan-perso/rickdetect"
+    },
+    "config": {
+        "userAgentSwitcher": {
+            "message": "Change User Agent [Y/N] [Default : Y] ",
+            "warning": "Choose Y (Yes) or N (No).",
+            "infoText": "Change the user agent : "
+        },
+        "sendPageCode": {
+            "message": "Show the webpage code [Y/N] [Default : N] ",
+            "warning": "Choose Y (Yes) or N (No).",
+            "infoText": "Show the code of the webpage : "
+        },
+        "language": {
+            "message": "Language used by Rickdetect [fr/en] [Default : fr (french)] ",
+            "warning": "Choose fr (français/french) ou en (english/anglais).",
+            "infoText": "Language : "
+        }
+    },
+    "fetch": {
+        "errENOTFOUND": "Unable to access the site : Network error or problem of the website.",
+        "unkownError": "An error occurred : %ERROR%",
+        "notValidURL": "%LINK% isn't a valid address, it does not contain domain (.com, .fr, etc)."
+    },
+    "publish": {
+        "hasteNotFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll not found !\n\n\n%CODE%",
+        "hasteFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll found !\n\n\n%CODE%",
+
+        "found": "This link is suspect...",
+        "notFound": "This link is not suspect..."
+    }
+}
