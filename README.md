@@ -27,6 +27,7 @@ $ npm link
 
 ## Utilisation
 
+**Analyser une URL :**
 ```
 $ rickdetect --help
 
@@ -39,6 +40,15 @@ $ rickdetect --help
     --link -l <lien>         URL (Si non fournis, accède a votre presse papier)
     --config -c              Permet d'entrer dans la configuration de Rickdetect
     --version -v             Afficher la version que Rickdetect utilise
+```
+
+**Reporter un problème directement via termiinal :**
+```
+$ rickdetect-feedback
+
+  Titre de votre demande (1/3) : ...
+  Description de votre demande (2/3) : ...
+  Comment vous contacter (3/3) : ...
 ```
 
 
@@ -60,6 +70,8 @@ $ rickdetect --help
 * Tout les texte peuvent être modifié via les fichier de language (language-en.json et language-fr.json)
 * Option --version (ou -v) pour voir la version utilisés
 
+## 2.1.0 --> 2.2.0
+* Intégration d'un système de feedback intégré (pour signaler des bugs par exemple)
 
 ## Utilisé pour la création
 
@@ -72,6 +84,7 @@ $ rickdetect --help
 * [conf](https://www.npmjs.com/package/conf) (Enregistrer des données de configuration)
 
 * [Hastebin edit](https://hasteb.herokuapp.com)
+* API de Feedback privé (la mienne, aucun lien)
 * Du temps...
 
 
