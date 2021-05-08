@@ -65,12 +65,12 @@ $ rickdetect-feedback
 * Ajout d'un fichier .npmrc pour ne pas avoir de package-lock.json
 * Beaucoup d'autre chose...
 
-## 2.0.0 --> 2.1.0
+#### 2.0.0 --> 2.1.0
 * Ajout de la langue EN
 * Tout les texte peuvent être modifié via les fichier de language (language-en.json et language-fr.json)
 * Option --version (ou -v) pour voir la version utilisés
 
-## 2.1.0 --> 2.2.0
+#### 2.1.0 --> 2.2.0
 * Intégration d'un système de feedback intégré (pour signaler des bugs par exemple)
 
 ## Utilisé pour la création
