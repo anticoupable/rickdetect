@@ -28,6 +28,7 @@ $ npm link
 
 ## Use
 
+**Check for a rick roll :**
 ```
 $ rickdetect --help
 
@@ -40,6 +41,15 @@ $ rickdetect --help
     --link -l <link>         URL (If not gived, check your clipboard)
     --config -c              Go into the Rickdetect config
     --version -v             Show the version used by Rickdetect
+```
+
+**Report a thing from the terminal :**
+```
+$ rickdetect-feedback
+
+  Title of your request (1/3) : ...
+  Description of your request (2/3) : ...
+  How to contact you (3/3) : ...
 ```
 
 
@@ -59,6 +69,7 @@ $ rickdetect --help
 * [conf](https://www.npmjs.com/package/conf) (Save configuration)
 
 * [Hastebin edit](https://hasteb.herokuapp.com)
+* Private feedback API (mine so no link)
 
 
 ## Example
