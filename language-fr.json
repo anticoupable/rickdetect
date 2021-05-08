@@ -41,5 +41,24 @@
 
         "found": "Ce lien est suspect...",
         "notFound": "Ce lien n'a pas l'air très suspect..."
+    },
+    "feedback": {
+        "requestAsk": {
+            "title": "Titre de votre demande (1/3) : ",
+            "description": "\nDescription de votre demande (2/3) : ",
+            "contactMethod": "\nComment vous contacter (3/3) : ",
+            "received": "\n\nC'est reçu !"
+        },
+        "error": {
+            "unkownError": "Une erreur inconnu s'est produite : %ERROR%",
+            "emptyContact": "\nCe que vous avez écrit est vide / trop court.. : ",
+            "emptyContactInfo": "Indiquez un moyen de contact comme votre Twitter, Discord ou adresse mail",
+
+            "emptyDescription": "\nCe que vous avez écrit est vide / trop court / trop long.. : ",
+            "emptyDescriptionInfo": "Indiquez la description de cette demande de contact. ",
+
+            "emptyTitle": "\nCe que vous avez écrit est vide / trop court.. : ",
+            "emptyTitleInfo": "Indiquez le titre de cette demande de contact"
+        }
     }
 }
