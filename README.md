@@ -84,7 +84,7 @@ $ rickdetect-feedback
 * [conf](https://www.npmjs.com/package/conf) (Enregistrer des données de configuration)
 
 * [Hastebin edit](https://hasteb.herokuapp.com)
-* API de Feedback privé (la mienne, aucun lien)
+* API de Feedback privé (la mienne, aucun lien)
 * Du temps...
 
 
