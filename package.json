@@ -1,6 +1,6 @@
 {
   "name": "rickdetect",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Cherche si un lien tente de vous rick roll.",
   "main": "index.js",
   "repository": {
@@ -23,7 +23,12 @@
     "twitter": "Johan_Stickman",
     "discord": "Johan#8021"
   },
-  "bin": "index.js",
+  "bin": {
+    "rickdetect": "./index.js",
+    "rickdetect-check": "./index.js",
+    "rickfeedback": "./feedback.js",
+    "rickdetect-feedback": "./feedback.js"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/johan-perso/rickdetect/issues"
@@ -36,6 +41,7 @@
     "hastebin.js": "^1.3.2",
     "meow": "^9.0.0",
     "node-fetch": "^2.6.1",
-    "prompt": "^1.1.0"
+    "prompt": "^1.1.0",
+    "terminal-kit": "^2.1.1"
   }
 }
