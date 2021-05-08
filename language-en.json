@@ -41,5 +41,24 @@
 
         "found": "This link is suspect...",
         "notFound": "This link is not suspect..."
+    },
+    "feedback": {
+        "requestAsk": {
+            "title": "Title of your request (1/3) : ",
+            "description": "\nDescription of your request (2/3) : ",
+            "contactMethod": "\nHow to contact you (3/3) : ",
+            "received": "\n\nIt's received !"
+        },
+        "error": {
+            "unkownError": "An unknown error occurred : %ERROR%",
+            "emptyContact": "\nWhat you writed is empty / too little.. : ",
+            "emptyContactInfo": "Choose a method for contact you (like your Twitter or Discord). ",
+
+            "emptyDescription": "\nWhat you writed is empty / too little / too big.. : ",
+            "emptyDescriptionInfo": "Indicate the description of this request. ",
+
+            "emptyTitle": "\nWhat you writed is empty / too little.. : ",
+            "emptyTitleInfo": "Indicate the title of this request. "
+        }
     }
 }
