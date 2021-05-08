@@ -61,7 +61,7 @@ ${lang.cliUse.option}
 
 // Donner la version avec l'option associé
 if(cli.flags.version){
-	console.log(lang.version.info.replace(/%VERSION%/g, "2.1.0"))
+	console.log(lang.version.info.replace(/%VERSION%/g, "2.2.0"))
 	console.log(lang.version.downloadMajText + chalk.cyan(lang.version.downloadMajLink))
 	return process.exit()
 }
