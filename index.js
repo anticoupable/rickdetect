@@ -61,7 +61,7 @@ ${lang.cliUse.option}
 
 // Donner la version avec l'option associé
 if(cli.flags.version){
-	console.log(lang.version.info.replace(/%VERSION%/g, "2.2.0"))
+	console.log(lang.version.info.replace(/%VERSION%/g, "2.3.0"))
 	console.log(lang.version.downloadMajText + chalk.cyan(lang.version.downloadMajLink))
 	return process.exit()
 }
@@ -112,12 +112,13 @@ if(cli.flags.config){
 
 } else {
 // Chercher un rick roll
-    // Fonction pour fetch le site (et change l'user agent pour empêcher certains site de croire que c'est un robot)
-    async function fetchSite(url){
-        // Agent utilisateur
-        if(userAgentSwitcher === "Y") var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.0000.000 Safari/537.00"
-        if(userAgentSwitcher === "N") var userAgent = "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
+    // Obtenir l'user agent a utilisé
+    if(userAgentSwitcher === "Y") var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.0000.000 Safari/537.00"
+    if(userAgentSwitcher === "N") var userAgent = "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
 
+
+    // Fonction pour fetch le site : obtenir le code (et change l'user agent pour empêcher certains site de croire que c'est un robot)
+    async function fetchSiteCode(url){
         // Fetch
         var code = await fetch(url, { method: 'GET', follow: 20, size: 500000000, headers: { 'User-Agent': userAgent } })
             .then(res => res.text())
@@ -129,6 +130,21 @@ if(cli.flags.config){
         
         // Retourner le code
         return code
+    }
+
+    // Fonction pour fetch le site : obtenir l'header (et change l'user agent pour empêcher certains site de croire que c'est un robot)
+    async function fetchSiteHeader(url){
+        // Fetch
+        var header = await fetch(url, { method: 'GET', follow: 20, size: 500000000, headers: { 'User-Agent': userAgent } })
+            .then(res => res.headers.get('refresh'))
+            .catch(err => {
+                // En cas d'erreur
+                if(err.code === "ENOTFOUND") return console.log(chalk.red(lang.fetch.errENOTFOUND)) && process.exit()
+                console.log(chalk.red(lang.fetch.unkownError.replace(/%ERROR%/g, err.message))) && process.exit()
+            })
+
+            // Retourner le code
+            return header
     }
 
     // Trouve l'argument (presse papier / option CLI)
@@ -148,14 +164,23 @@ if(cli.flags.config){
     // Dit si il n'y a pas de domaine
     if(!link.includes(".")) return console.log(chalk.red(lang.fetch.notValidURL.replace(/%LINK%/g, link))) && process.exit()
 
-    // Regarder si le code de la page contient certains éléments
-    fetchSite(link).then(code => {
-        if(code.toLowerCase().includes("never","gonna","give","you","up") || code.toLowerCase().includes("rick","roll") || code.toLowerCase().includes("never","gonna","desert","you")){
+    // Regarder si l'header contient un lien rick roll
+    fetchSiteHeader(link).then(header => {
+        if(header && header.includes("dQw4w9WgXcQ")){
             console.log(chalk.red(lang.publish.found))
-            if(sendPageCode === "Y"){ haste.post(lang.publish.hasteFound.replace(/%CODE%/g, code), "html").then(link => console.log(link)); }
+            if(sendPageCode === "Y") fetchSiteCode(link).then(code => { haste.post(lang.publish.hasteFound.replace(/%URL%/g, link).replace(/%CODE%/g, code).replace(/%HEADER%/g, header), "html").then(link => console.log(link) && process.exit()) })
+            if(sendPageCode !== "Y") return process.exit()
         } else {
-            console.log(chalk.green(lang.publish.notFound))
-            if(sendPageCode === "Y"){ haste.post(lang.publish.hasteNotFound.replace(/%CODE%/g, code), "html").then(link => console.log(link)); }
+            // Regarder si le code de la page contient certains éléments
+            fetchSiteCode(link).then(code => {
+                if(code.toLowerCase().includes("never","gonna","give","you","up") || code.toLowerCase().includes("rick","roll") || code.toLowerCase().includes("never","gonna","desert","you")){
+                    console.log(chalk.red(lang.publish.found))
+                    if(sendPageCode === "Y"){ haste.post(lang.publish.hasteFound.replace(/%URL%/g, link).replace(/%CODE%/g, code).replace(/%HEADER%/g, header), "html").then(link => console.log(link)); }
+                } else {
+                    console.log(chalk.green(lang.publish.notFound))
+                    if(sendPageCode === "Y"){ haste.post(lang.publish.hasteNotFound.replace(/%URL%/g, link).replace(/%CODE%/g, code).replace(/%HEADER%/g, header), "html").then(link => console.log(link)); }
+                }
+            })
         }
     })
 
