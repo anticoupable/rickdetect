@@ -73,6 +73,9 @@ $ rickdetect-feedback
 #### 2.1.0 --> 2.2.0
 * Intégration d'un système de feedback intégré (pour signaler des bugs par exemple)
 
+#### 2.2.0 --> 2.3.0
+* Recherche de rick roll plus poussé : Même a travers le header de redirection (pour https://therickroll.com/ par exemple)
+
 ## Utilisé pour la création
 
 * [Meow](https://www.npmjs.com/package/meow) (CLI)
@@ -82,6 +85,7 @@ $ rickdetect-feedback
 * [Prompt](https://www.npmjs.com/package/prompt) (Demande de texte pour la configuration)
 * [Hastebin.js](https://www.npmjs.com/package/hastebin.js) (Option pour mettre le code d'une page sur Hastebin)
 * [conf](https://www.npmjs.com/package/conf) (Enregistrer des données de configuration)
+* [terminal-kit](https://www.npmjs.com/package/terminal-kit) (Couleur and demander pour du texte dans le feedback)
 
 * [Hastebin edit](https://hasteb.herokuapp.com)
 * API de Feedback privé (la mienne, aucun lien)
