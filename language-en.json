@@ -36,8 +36,8 @@
         "notValidURL": "%LINK% isn't a valid address, it does not contain domain (.com, .fr, etc)."
     },
     "publish": {
-        "hasteNotFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll not found !\n\n\n%CODE%",
-        "hasteFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll found !\n\n\n%CODE%",
+        "hasteNotFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll not found !\n\n\n====================== URL ======================\n\n\n%URL%\n\n\n================ Header/Redirect ================\n\n\n%HEADER%\n\n\n=================== HTML CODE ===================\n\n\n%CODE%",
+        "hasteFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll found !\n\n\n====================== URL ======================\n\n\n%URL%\n\n\n================ Header/Redirect ================\n\n\n%HEADER%\n\n\n=================== HTML CODE ===================\n\n\n%CODE%",
 
         "found": "This link is suspect...",
         "notFound": "This link is not suspect..."
@@ -51,13 +51,13 @@
         },
         "error": {
             "unkownError": "An unknown error occurred : %ERROR%",
-            "emptyContact": "\nWhat you writed is empty / too little.. : ",
+            "emptyContact": "\nWhat you wrote is empty / too little.. : ",
             "emptyContactInfo": "Choose a method for contact you (like your Twitter or Discord). ",
 
-            "emptyDescription": "\nWhat you writed is empty / too little / too big.. : ",
+            "emptyDescription": "\nWhat you wrote is empty / too little / too big.. : ",
             "emptyDescriptionInfo": "Indicate the description of this request. ",
 
-            "emptyTitle": "\nWhat you writed is empty / too little.. : ",
+            "emptyTitle": "\nWhat you wrote is empty / too little.. : ",
             "emptyTitleInfo": "Indicate the title of this request. "
         }
     }
