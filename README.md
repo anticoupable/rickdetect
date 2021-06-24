@@ -76,6 +76,10 @@ $ rickdetect-feedback
 #### 2.2.0 --> 2.3.0
 * Recherche de rick roll plus poussé : Même a travers le header de redirection (pour https://therickroll.com/ par exemple)
 
+#### 2.3.0 --> 2.4.0
+* Le système de rapport via Hastebin (l'option pour crée des haste contenant le résultat de la recherche) a été amélioré : meilleur affichage, meilleur code
+
+
 ## Utilisé pour la création
 
 * [Meow](https://www.npmjs.com/package/meow) (CLI)
