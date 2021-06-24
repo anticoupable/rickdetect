@@ -61,7 +61,7 @@ ${lang.cliUse.option}
 
 // Donner la version avec l'option associé
 if(cli.flags.version){
-	console.log(lang.version.info.replace(/%VERSION%/g, "2.3.0"))
+	console.log(lang.version.info.replace(/%VERSION%/g, "2.4.0"))
 	console.log(lang.version.downloadMajText + chalk.cyan(lang.version.downloadMajLink))
 	return process.exit()
 }
@@ -111,31 +111,45 @@ if(cli.flags.config){
     });
 
 } else {
-// Chercher un rick roll
-    // Obtenir l'user agent a utilisé
-    if(userAgentSwitcher === "Y") var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.0000.000 Safari/537.00"
-    if(userAgentSwitcher === "N") var userAgent = "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
+    mainSearch() // Chercher un rick roll
+}
 
+// Fonction principale pour les recherches de rick roll
+async function mainSearch(){
+        // Obtenir l'user agent a utilisé
+        if(userAgentSwitcher === "Y") var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.0000.000 Safari/537.00"
+        if(userAgentSwitcher === "N") var userAgent = "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
 
-    // Fonction pour fetch le site : obtenir le code (et change l'user agent pour empêcher certains site de croire que c'est un robot)
-    async function fetchSiteCode(url){
-        // Fetch
-        var code = await fetch(url, { method: 'GET', follow: 20, size: 500000000, headers: { 'User-Agent': userAgent } })
-            .then(res => res.text())
-            .catch(err => {
-                // En cas d'erreur
-                if(err.code === "ENOTFOUND") return console.log(chalk.red(lang.fetch.errENOTFOUND)) && process.exit()
-                console.log(chalk.red(lang.fetch.unkownError.replace(/%ERROR%/g, err.message))) && process.exit()
-            })
-        
-        // Retourner le code
-        return code
-    }
+        // Trouve l'argument (presse papier / option CLI)
+        if(cli.flags.link) var linkA = cli.flags.link
+        if(!cli.flags.link) var linkA = clipboardy.readSync()
 
-    // Fonction pour fetch le site : obtenir l'header (et change l'user agent pour empêcher certains site de croire que c'est un robot)
-    async function fetchSiteHeader(url){
-        // Fetch
-        var header = await fetch(url, { method: 'GET', follow: 20, size: 500000000, headers: { 'User-Agent': userAgent } })
+        // Enleve les espaces et saut de ligne de l'URL
+        if(linkA.includes(" ") && linkA.includes("\n")) var linkB = linkA.replace(/ /g, "").replace(/\n/g, "")
+        if(linkA.includes(" ") && !linkA.includes("\n")) var linkB = linkA.replace(/ /g, "")
+        if(!linkA.includes(" ") && linkA.includes("\n")) var linkB = linkA.replace(/\n/g, "")
+        if(!linkA.includes(" ") && !linkA.includes("\n")) var linkB = linkA
+
+        // Ajoute https:// si besoin
+        if(!linkB.startsWith("https://") && !linkB.startsWith("http://")) var link = "https://" + linkB
+        if(linkB.startsWith("https://") || linkB.startsWith("http://")) var link = linkB
+
+        // Dit si il n'y a pas de domaine
+        if(!link.includes(".")) return console.log(chalk.red(lang.fetch.notValidURL.replace(/%LINK%/g, link))) && process.exit()
+
+        // Préparer le nombre de found
+        var found = 0
+
+        // Obtenir l'URL (haste)
+        if(link){
+            var hasteLinkMessage = "\n\n\n====================== URL ======================\n\n\n" + link
+        } else {
+            var hasteLinkMessage = "\n\n\n====================== URL ======================\n\n\nNo."
+        }
+
+        // Obtenir l'header de refresh (haste)
+            // Fetch
+            var headerRefresh = await fetch(link, { method: 'GET', follow: 20, size: 500000000, headers: { 'User-Agent': userAgent } })
             .then(res => res.headers.get('refresh'))
             .catch(err => {
                 // En cas d'erreur
@@ -143,45 +157,55 @@ if(cli.flags.config){
                 console.log(chalk.red(lang.fetch.unkownError.replace(/%ERROR%/g, err.message))) && process.exit()
             })
 
-            // Retourner le code
-            return header
-    }
+            // Faire les vérifications + le message
+            if(headerRefresh && headerRefresh.includes("dQw4w9WgXcQ")){
+                found++
+                var hasteRefreshMessage = "\n\n\n================ Header/Redirect ================\n\n\n" + headerRefresh
+            } else {
+                var hasteRefreshMessage = "\n\n\n================ Header/Redirect ================\n\n\nNo."
+            }
 
-    // Trouve l'argument (presse papier / option CLI)
-    if(cli.flags.link) var linkA = cli.flags.link
-    if(!cli.flags.link) var linkA = clipboardy.readSync()
-
-    // Enleve les espaces et saut de ligne de l'URL
-    if(linkA.includes(" ") && linkA.includes("\n")) var linkB = linkA.replace(/ /g, "").replace(/\n/g, "")
-    if(linkA.includes(" ") && !linkA.includes("\n")) var linkB = linkA.replace(/ /g, "")
-    if(!linkA.includes(" ") && linkA.includes("\n")) var linkB = linkA.replace(/\n/g, "")
-    if(!linkA.includes(" ") && !linkA.includes("\n")) var linkB = linkA
-
-    // Ajoute https:// si besoin
-    if(!linkB.startsWith("https://") && !linkB.startsWith("http://")) var link = "https://" + linkB
-    if(linkB.startsWith("https://") || linkB.startsWith("http://")) var link = linkB
-
-    // Dit si il n'y a pas de domaine
-    if(!link.includes(".")) return console.log(chalk.red(lang.fetch.notValidURL.replace(/%LINK%/g, link))) && process.exit()
-
-    // Regarder si l'header contient un lien rick roll
-    fetchSiteHeader(link).then(header => {
-        if(header && header.includes("dQw4w9WgXcQ")){
-            console.log(chalk.red(lang.publish.found))
-            if(sendPageCode === "Y") fetchSiteCode(link).then(code => { haste.post(lang.publish.hasteFound.replace(/%URL%/g, link).replace(/%CODE%/g, code).replace(/%HEADER%/g, header), "html").then(link => console.log(link) && process.exit()) })
-            if(sendPageCode !== "Y") return process.exit()
-        } else {
-            // Regarder si le code de la page contient certains éléments
-            fetchSiteCode(link).then(code => {
-                if(code.toLowerCase().includes("never","gonna","give","you","up") || code.toLowerCase().includes("rick","roll") || code.toLowerCase().includes("never","gonna","desert","you")){
-                    console.log(chalk.red(lang.publish.found))
-                    if(sendPageCode === "Y"){ haste.post(lang.publish.hasteFound.replace(/%URL%/g, link).replace(/%CODE%/g, code).replace(/%HEADER%/g, header), "html").then(link => console.log(link)); }
-                } else {
-                    console.log(chalk.green(lang.publish.notFound))
-                    if(sendPageCode === "Y"){ haste.post(lang.publish.hasteNotFound.replace(/%URL%/g, link).replace(/%CODE%/g, code).replace(/%HEADER%/g, header), "html").then(link => console.log(link)); }
-                }
+        // Obtenir l'header générale (haste)
+            // Fetch
+            var headerLinkValue = await fetch(link, { method: 'GET', follow: 20, size: 500000000, headers: { 'User-Agent': userAgent } })
+            .then(res => res.headers.get('link'))
+            .catch(err => {
+                // En cas d'erreur
+                if(err.code === "ENOTFOUND") return console.log(chalk.red(lang.fetch.errENOTFOUND)) && process.exit()
+                console.log(chalk.red(lang.fetch.unkownError.replace(/%ERROR%/g, err.message))) && process.exit()
             })
-        }
-    })
 
+            // Faire les vérifications + le message
+            if(headerLinkValue){
+                var hasteLinkValueMessage = "\n\n\n================== Header/Link ==================\n\n\n" + headerLinkValue
+            } else {
+                var hasteLinkValueMessage = "\n\n\n================== Header/Link ==================\n\n\nNo."
+            }
+
+        // Obtenir le code (haste)
+            // Fetch
+            var code = await fetch(link, { method: 'GET', follow: 20, size: 500000000, headers: { 'User-Agent': userAgent } })
+            .then(res => res.text())
+            .catch(err => {
+                // En cas d'erreur
+                if(err.code === "ENOTFOUND") return console.log(chalk.red(lang.fetch.errENOTFOUND)) && process.exit()
+                console.log(chalk.red(lang.fetch.unkownError.replace(/%ERROR%/g, err.message))) && process.exit()
+            })
+
+            // Faire les vérifications + le message
+            if(code.toLowerCase().includes("never","gonna","give","you","up") || code.toLowerCase().includes("rick","roll") || code.toLowerCase().includes("never","gonna","desert","you")){
+                found++
+                var hasteCodeMessage = "\n\n\n=================== HTML CODE ===================\n\n\n" + code
+            } else {
+                var hasteCodeMessage = "\n\n\n=================== HTML CODE ===================\n\n\nNo."
+            }
+
+        // Dire si ça un rick roll a été trouvé
+        if(found !== 0) console.log(chalk.red(lang.publish.found.replace(/%INTENSITY%/g, found)))
+        if(found === 0) console.log(chalk.green(lang.publish.notFound.replace(/%INTENSITY%/g, found)))
+
+        // Crée le haste si besoin
+        if(sendPageCode === "Y" && found !== 0) haste.post(lang.publish.hasteFound + hasteLinkMessage + hasteRefreshMessage + hasteLinkValueMessage + hasteCodeMessage).then(link => console.log(chalk.blue("\nRapport : ") + chalk.cyan(link.replace(".js",""))) && process.exit())
+        if(sendPageCode === "Y" && found === 0) haste.post(lang.publish.hasteNotFound + hasteLinkMessage + hasteRefreshMessage + hasteLinkValueMessage + hasteCodeMessage).then(link => console.log(chalk.blue("\nRapport : ") + chalk.cyan(link.replace(".js",""))) && process.exit())
+        if(sendPageCode !== "Y") return process.exit()
 }
