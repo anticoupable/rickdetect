@@ -20,9 +20,9 @@
             "infoText": "Change the user agent : "
         },
         "sendPageCode": {
-            "message": "Show the webpage code [Y/N] [Default : N] ",
+            "message": "Create webpage report [Y/N] [Default : N] ",
             "warning": "Choose Y (Yes) or N (No).",
-            "infoText": "Show the code of the webpage : "
+            "infoText": "Create webpage report : "
         },
         "language": {
             "message": "Language used by Rickdetect [fr/en] [Default : fr (french)] ",
@@ -36,11 +36,11 @@
         "notValidURL": "%LINK% isn't a valid address, it does not contain domain (.com, .fr, etc)."
     },
     "publish": {
-        "hasteNotFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll not found !\n\n\n====================== URL ======================\n\n\n%URL%\n\n\n================ Header/Redirect ================\n\n\n%HEADER%\n\n\n=================== HTML CODE ===================\n\n\n%CODE%",
-        "hasteFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll found !\n\n\n====================== URL ======================\n\n\n%URL%\n\n\n================ Header/Redirect ================\n\n\n%HEADER%\n\n\n=================== HTML CODE ===================\n\n\n%CODE%",
+        "hasteNotFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n",
+        "hasteFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n",
 
-        "found": "This link is suspect...",
-        "notFound": "This link is not suspect..."
+        "found": "This link is suspect... Intensity : %INTENSITY%",
+        "notFound": "This link is not suspect... Intensity : %INTENSITY%"
     },
     "feedback": {
         "requestAsk": {
