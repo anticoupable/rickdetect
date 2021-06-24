@@ -20,9 +20,9 @@
             "infoText": "Changer l'agent utilisateur : "
         },
         "sendPageCode": {
-            "message": "Afficher le code de la page [Y/N] [Défaut : N] ",
+            "message": "Crée un rapport Hastebin [Y/N] [Défaut : N] ",
             "warning": "Veuillez choisir Y (oui) ou N (non).",
-            "infoText": "Afficher le code la page : "
+            "infoText": "Crée un rapport Hastebin : "
         },
         "language": {
             "message": "Langue de Rickdetect [fr/en] [Défaut : fr] ",
@@ -36,11 +36,11 @@
         "notValidURL": "%LINK% n'est pas une adresse valide, il manque une extension de domaine (.com, .fr, etc)."
     },
     "publish": {
-        "hasteNotFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll non trouvé !\n\n\n====================== URL ======================\n\n\n%URL%\n\n\n================ Header/Redirect ================\n\n\n%HEADER%\n\n\n=================== HTML CODE ===================\n\n\n%CODE%",
-        "hasteFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll trouvé !\n\n\n====================== URL ======================\n\n\n%URL%\n\n\n================ Header/Redirect ================\n\n\n%HEADER%\n\n\n=================== HTML CODE ===================\n\n\n%CODE%",
+        "hasteNotFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll non trouvé !\n",
+        "hasteFound": "Rickdetect CLI - https://github.com/johan-perso/rickdetect\n\nRick roll trouvé !\n",
 
-        "found": "Ce lien est suspect...",
-        "notFound": "Ce lien n'a pas l'air très suspect..."
+        "found": "Ce lien est suspect... Intensité : %INTENSITY%",
+        "notFound": "Ce lien n'a pas l'air très suspect... Intensité : %INTENSITY%"
     },
     "feedback": {
         "requestAsk": {
