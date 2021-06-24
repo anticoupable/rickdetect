@@ -102,6 +102,7 @@ $ rickdetect-feedback
 * https://youtu.be/xaazUgEKuVA
 * https://is.gd/OiqSNs
 * http://bit.do/not-rick
+* https://therickroll.com/
 
 
 ## Licence
