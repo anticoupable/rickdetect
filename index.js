@@ -9,8 +9,21 @@ const chalk = require('chalk'); // https://www.npmjs.com/package/chalk
 const prompt = require('prompt'); // https://www.npmjs.com/package/prompt
 const hastebin = require('hastebin.js'); // https://www.npmjs.com/package/hastebin.js
 const haste = new hastebin({url: 'https://hasteb.herokuapp.com'}); // Hastebin.js
-const Conf = require('conf'); // https://www.npmjs.com/package/conf
-const config = new Conf({ projectSuffix: "cli" }); // Conf
+
+// Obtenir le chemin de la configuration
+function configPath(jsonExtension=true){
+	// (copié collé de johan-perso/twitterminal)
+	if(require('os').platform() === "win32") var configPath = require('path').join(process.env.APPDATA, "johanstickman-cli", "ecochat")
+	if(require('os').platform() === "darwin") var configPath = require('path').join(require('os').homedir(), "library", "Preferences", "johanstickman-cli", "ecochat")
+	if(require('os').platform() === "linux") var configPath = require('path').join(require('os').homedir(), ".config", "johanstickman-cli", "ecochat")
+
+	if(jsonExtension === true) configPath = require('path').join(configPath, "ecochatConfig.json")
+	return configPath;
+}
+
+// Préparer une configuration
+const Conf = require('conf');
+const config = new Conf({ cwd: configPath(false), configName: 'ecochatConfig' })
 
 // Accès a la configuration
     // Get
@@ -68,7 +81,7 @@ if(cli.flags.version){
 
 // Configuration
 if(cli.flags.config){
-    // Liste des question
+    // Liste des questions
     const properties = [
         {
             name: 'userAgentSwitcher',
