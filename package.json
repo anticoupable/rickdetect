@@ -1,6 +1,6 @@
 {
   "name": "rickdetect",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Cherche si un lien tente de vous rick roll.",
   "main": "index.js",
   "repository": {
@@ -19,7 +19,7 @@
   "author": {
     "name": "Johan",
     "email": "contact.meniro@gmail.com",
-    "url": "https://johan-perso.glitch.me",
+    "url": "https://contact.johanstickman.com",
     "twitter": "Johan_Stickman",
     "discord": "Johan#8021"
   },
